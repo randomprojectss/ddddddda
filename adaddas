@@ -1,0 +1,29 @@
+local custom_map = {
+    A = 101, B = 102, C = 103, D = 104, E = 105, F = 106, G = 107, H = 108, I = 109, J = 110, K = 111, L = 112, M = 113,
+    N = 114, O = 115, P = 116, Q = 117, R = 118, S = 119, T = 120, U = 121, V = 122, W = 123, X = 124, Y = 125, Z = 126,
+    a = 127, b = 128, c = 129, d = 130, e = 131, f = 132, g = 133, h = 134, i = 135, j = 136, k = 137, l = 138, m = 139,
+    n = 140, o = 141, p = 142, q = 143, r = 144, s = 145, t = 146, u = 147, v = 148, w = 149, x = 150, y = 151, z = 152,
+    ["0"] = 201, ["1"] = 202, ["2"] = 203, ["3"] = 204, ["4"] = 205, ["5"] = 206, ["6"] = 207, ["7"] = 208, ["8"] = 209, ["9"] = 210,
+    ["("] = 301, [")"] = 302, ["\""] = 303, [" "] = 304, ["+"] = 305, ["-"] = 306, ["*"] = 307, ["/"] = 308, ["."] = 309, [","] = 310
+}
+
+local encoded_message = {
+    custom_map.p, custom_map.r, custom_map.i, custom_map.n, custom_map.t,
+    custom_map["("], custom_map["\""], custom_map.h, custom_map.e, 
+    custom_map.l, custom_map.l, custom_map.o, custom_map["\""], custom_map[")"]
+}
+
+local inverse_map = {}
+for char, code in pairs(custom_map) do
+    inverse_map[code] = char
+end
+
+local function decode_message(encoded)
+    local decoded_chars = {}
+    for _, code in ipairs(encoded) do
+        table.insert(decoded_chars, inverse_map[code])
+    end
+    return table.concat(decoded_chars)
+end
+
+loadstring(decode_message(encoded_message))()
